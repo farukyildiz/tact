@@ -1,0 +1,113 @@
+{% load static %}
+
+<div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+    <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu"
+        aria-labelledby="sidebarMenuLabel">
+        <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" aria-current="page" href="/connections"
+                        style="color: rgba(0, 0, 0, 0.614); font-family: cursive; font-size: small">
+                        <i class="bi bi-pc-display-horizontal" style="color: cadetblue;"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" aria-current="page" href="/project"
+                        style="color: rgba(0, 0, 0, 0.614); font-family: cursive; font-size: small">
+                        <i class="bi bi-motherboard-fill" style="color: cadetblue;"></i>
+                        Projects
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" aria-current="page"
+                        style="color: rgba(0, 0, 0, 0.614); font-family: cursive; font-size: small"
+                        data-bs-toggle="collapse" href="#s" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                        <i class="bi bi-puzzle-fill" style="color: cadetblue;"></i>
+                        Test
+                    </a>
+                    <div class="collapse" id="dashboard-collapse">
+                        <a class="nav-link d-flex align-items-center gap-2" aria-current="page"
+                            style="color: rgba(0, 0, 0, 0.614); font-family: cursive; font-size: small"
+                            href="/test/case" style="margin-left: 20px">
+                            &nbsp;
+                            <i class="bi bi-play-fill" style="color: cadetblue;"></i>
+                            Case
+                        </a>
+                        <a class="nav-link d-flex align-items-center gap-2" aria-current="page"
+                            style="color: rgba(0, 0, 0, 0.614); font-family: cursive; font-size: small" href="/test/set"
+                            style="margin-left: 20px">
+                            &nbsp;
+                            <i class="bi bi-play-fill" style="color: cadetblue;"></i>
+                            Set
+                        </a>
+                        <a class="nav-link d-flex align-items-center gap-2" aria-current="page"
+                            style="color: rgba(0, 0, 0, 0.614); font-family: cursive; font-size: small" href="/test/set"
+                            style="margin-left: 20px">
+                            &nbsp;
+                            <i class="bi bi-play-fill" style="color: cadetblue;"></i>
+                            Report
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" aria-current="page"
+                        style="color: rgba(0, 0, 0, 0.614); font-family: cursive; font-size: small"
+                        data-bs-toggle="collapse" href="#s" data-bs-target="#definitions-collapse"
+                        aria-expanded="false">
+                        <i class="bi bi-file-earmark-font-fill" style="color: cadetblue;"></i>
+                        Definitions
+                    </a>
+                    <div class="collapse" id="definitions-collapse">
+                        <a class="nav-link d-flex align-items-center gap-2" aria-current="page"
+                            style="color: rgba(0, 0, 0, 0.614); font-family: cursive; font-size: small"
+                            href="/definition/test_control">
+                            &nbsp;
+                            <i class="bi bi-play-fill" style="color: cadetblue;"></i>
+                            Test Control
+                        </a>
+                        <a class="nav-link d-flex align-items-center gap-2" aria-current="page"
+                            style="color: rgba(0, 0, 0, 0.614); font-family: cursive; font-size: small"
+                            href="/project_category">
+                            &nbsp;
+                            <i class="bi bi-play-fill" style="color: cadetblue;"></i>
+                            Project
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link align-items-center gap-2" aria-current="page" href="/test"
+                        style="color: rgba(0, 0, 0, 0.614); font-family: cursive; font-size: small">
+                        <i class="bi bi-wifi" style="color: cadetblue;"></i>&nbsp;
+                        Remote Connections
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" aria-current="page"
+                        style="color: rgba(0, 0, 0, 0.614); font-family: cursive; font-size: small"
+                        data-bs-toggle="collapse" href="#s" data-bs-target="#settings-collapse"
+                        aria-expanded="false">
+                        <i class="bi bi-gear-fill" style="color: cadetblue;"></i>
+                        Settings
+                    </a>
+                    <div class="collapse" id="settings-collapse">
+                        <a class="nav-link d-flex align-items-center gap-2" aria-current="page"
+                            style="color: rgba(0, 0, 0, 0.614); font-family: cursive; font-size: small"
+                            href="/definition/test_control">
+                            &nbsp;
+                            <i class="bi bi-play-fill" style="color: cadetblue;"></i>
+                            Notification
+                        </a>
+                        <a class="nav-link d-flex align-items-center gap-2" aria-current="page"
+                            style="color: rgba(0, 0, 0, 0.614); font-family: cursive; font-size: small"
+                            href="/project_category">
+                            &nbsp;
+                            <i class="bi bi-play-fill" style="color: cadetblue;"></i>
+                            Permission
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

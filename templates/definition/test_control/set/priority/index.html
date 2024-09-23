@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block page_title %}Set Priorities{% endblock %}
+{% block container_title %}
+<ul class="nav nav-tabs" id="myTab" role="tablist"
+    style="font-size: small; border: 1px; float: bottom; margin-bottom: -15px">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button"
+            role="tab" aria-controls="home-tab-pane" aria-selected="true">Set Priorities</button>
+    </li>
+</ul>
+{% endblock %}
+
+{% block toolbar %}
+<ul class="nav nav-tabs" id="myTab" role="tablist"
+    style="font-size: small; border: 1px; float: bottom; margin-bottom: -10px;">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="home-tab" style="font-size: x-small; background-color: gainsboro"
+            href="/definition/test_control/set/priority/create">Create</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<script src="{% static 'js/executer/main.js' %}"></script>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive card" style="padding: 10px; font-size: x-small">
+            <table class="table table-hover">
+                <thead>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th style="width: 40px;"></th>
+                </thead>
+                <tbody>
+                    {% for priority in priorities %}
+                    <tr>
+                        <td>{{ priority.priority }}</td>
+                        <td>{{ priority.status }}</td>
+                        <td>
+                            <div class="dropdown" style="float: right; font-size: x-small">
+                                <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </a>
+                                <ul class="dropdown-menu" style="float: right; font-size: x-small">
+                                    <li>
+                                        <a class="dropdown-item" href="/test/case/view">View</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/case_type/edit/{{ case_type.id }}">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="loading" class="loading" style="display:none">Loading&#8230;</div>
+{% endblock %}

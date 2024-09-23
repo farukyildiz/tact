@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block page_title %}Icmp Sender{% endblock %}
+{% block container_title %}Icmp Sender{% endblock %}
+
+{% block toolbar %}
+{% endblock %}
+
+{% block content %}
+<script src="{% static 'js/packets/icmp/sender.js' %}"></script>
+<div class="row">
+    <div class="col-md-12">
+        <div class="input-group mb-12" style="margin-top: 30px">
+            <label class="input-group-text" for="selectType" style="width: 150px">Type</label>
+            <select class="form-select" id="selectType" name="selectType" onchange="changeCommandType()">
+                <option value="0">8 - Echo</option>
+                <option value="1">14 - Timestamp reply</option>
+                <option value="1">17 - Address mask request</option>
+            </select>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-8">
+        <div class="input-group">
+            <span class="input-group-text" style="width: 150px">IP Address</span>
+            <input type="text" class="form-control" id="inputUsername" name="inputIpAddress"
+                   placeholder="IP Address" maxlength="15" required>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="input-group">
+            <span class="input-group-text" style="width: 150px">Count</span>
+            <input type="number" class="form-control" id="inputCount" name="inputCount" placeholder="Count" value="4"
+                   required>
+        </div>
+    </div>
+</div>
+<div id="loading" class="loading" style="display:none">Loading&#8230;</div>
+{% endblock %}

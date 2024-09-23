@@ -1,0 +1,289 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block page_title %}Test Set{% endblock %}
+{% block container_title %}
+<ul class="nav nav-tabs" id="myTab" role="tablist"
+    style="font-size: small; border: 1px; float: bottom; margin-bottom: -15px">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button"
+            role="tab" aria-controls="home-tab-pane" aria-selected="true">Details</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button"
+            role="tab" aria-controls="profile-tab-pane" aria-selected="false">Case</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button"
+            role="tab" aria-controls="contact-tab-pane" aria-selected="false">Report</button>
+    </li>
+</ul>
+{% endblock %}
+
+{% block toolbar %}
+<ul class="nav nav-tabs" id="myTab" role="tablist"
+    style="font-size: small; border: 1px; float: bottom; margin-bottom: -10px;">
+    <li class="nav-item" role="presentation">
+        <select class="nav-link active" style="font-size: x-small; background-color: gainsboro">
+            <option>Action</option>
+            <option>Import cases</option>
+            <option>Export cases</option>
+        </select>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <form action="/test/set/save" method="POST">
+            {% csrf_token %}
+            <div class="card" style="padding: 10px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-text" style="width: 150px; font-size: small">Project</span>
+                            <select class="form-select" id="project" name="project" style="font-size: small">
+                                {% for project in projects %}
+                                    <option value="{{ project.id }}">{{ project.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 10px">
+                        <div class="input-group">
+                            <span class="input-group-text" style="width: 150px; font-size: small">Summary</span>
+                            <input type="text" class="form-control" id="summary" name="summary" style="font-size: small"
+                                maxlength="250" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="margin-top: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-text" style="width: 150px; font-size: small">Priority</span>
+                        <select class="form-select" id="priority" name="priority" style="font-size: small">
+                            {% for priority in priorities %}
+                                <option value="{{ priority.id }}">{{ priority.priority }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-6" style="margin-top: 10px">
+                    <div class="input-group">
+                        <span class="input-group-text" style="width: 150px; font-size: small">Category</span>
+                        <select class="form-select" id="category" name="category" style="font-size: small">
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.category }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-6" style="margin-top: 10px">
+                    <div class="input-group">
+                        <span class="input-group-text" style="width: 150px; font-size: small">Status</span>
+                        <select class="form-select" id="status" name="status" style="font-size: small">
+                            <option value="True">Enable</option>
+                            <option value="False">Disable</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-6" style="margin-top: 10px">
+                    <div class="input-group">
+                        <span class="input-group-text" style="width: 150px; font-size: small">Target Version</span>
+                        <select class="form-select" id="version" name="version" style="font-size: small" multiple>
+                            <option value="0">release/1.0.0</option>
+                            <option value="1">release/1.0.1</option>
+                            <option value="2">release/2.1.0</option>
+                            <option value="3">release/2.5.5</option>
+                            <option value="4">release/2.9.9</option>
+                            <option value="5">release/3.1.1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-6" style="margin-top: 10px">
+                    <div class="input-group">
+                        <span class="input-group-text" style="width: 150px; font-size: small">Components</span>
+                        <select class="form-select" id="status" name="status" style="font-size: small" multiple>
+                            <option value="0">cmp 1</option>
+                            <option value="1">cmp 2</option>
+                            <option value="2">cmp 3</option>
+                            <option value="3">cmp 4</option>
+                            <option value="4">cmp 5</option>
+                            <option value="5">cmp 6</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12" style="margin-top: 10px">
+                    <div class="input-group">
+                        <span class="input-group-text" style="width: 150px; font-size: small">Description</span>
+                        <textarea id="description" name="description" rows="7" class="form-control"
+                            style="resize: none"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12" style="margin-top: 10px">
+                    <input class="form-control" type="file" id="formFileMultiple" multiple>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+            <br>
+            <br>
+        </form>
+
+    </div>
+    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <div class="table-responsive card" style="padding: 10px; font-size: x-small">
+            <table class="table table-hover">
+                <thead>
+                    <th style="width: 30px;">
+                        <input type="checkbox" />
+                    </th>
+                    <th style="width: 40px;">#</th>
+                    <th>Summary</th>
+                    <th style="width: 130px;">Last Executed</th>
+                    <th style="width: 100px;">Execution Status</th>
+                    <th style="width: 60px;">Run</th>
+                    <th style="width: 40px;"></th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" /></td>
+                        <td>1</td>
+                        <td>Check receiver service</td>
+                        <td>01-01-2024 10:00:00</td>
+                        <td>
+                            <select>
+                                <option>Pass</option>
+                                <option>Fail</option>
+                            </select>
+                        </td>
+                        <td><i class="bi bi-play-fill"></i></td>
+                        <td>
+                            <div class="dropdown" style="float: right; font-size: x-small">
+                                <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </a>
+                                <ul class="dropdown-menu" style="float: right; font-size: x-small">
+                                    <li>
+                                        <a class="dropdown-item" href="/test/case/view">View</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/test/case/edit">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" /></td>
+                        <td>2</td>
+                        <td>Check transmitter service</td>
+                        <td>01-01-2024 10:00:00</td>
+                        <td>
+                            <select>
+                                <option>Pass</option>
+                                <option>Fail</option>
+                            </select>
+                        </td>
+                        <td><i class="bi bi-play-fill"></i></td>
+                        <td>
+                            <div class="dropdown" style="float: right; font-size: x-small">
+                                <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </a>
+                                <ul class="dropdown-menu" style="float: right; font-size: x-small">
+                                    <li>
+                                        <a class="dropdown-item" href="/test/case/view">View</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/test/case/edit">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" /></td>
+                        <td>3</td>
+                        <td>Check nat rules</td>
+                        <td>01-01-2024 10:00:00</td>
+                        <td>
+                            <select>
+                                <option>Pass</option>
+                                <option>Fail</option>
+                            </select>
+                        </td>
+                        <td><i class="bi bi-play-fill"></i></td>
+                        <td>
+                            <div class="dropdown" style="float: right; font-size: x-small">
+                                <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </a>
+                                <ul class="dropdown-menu" style="float: right; font-size: x-small">
+                                    <li>
+                                        <a class="dropdown-item" href="/test/case/view">View</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/test/case/edit">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" /></td>
+                        <td>4</td>
+                        <td>Check user rules</td>
+                        <td>01-01-2024 10:00:00</td>
+                        <td>
+                            <select>
+                                <option>Pass</option>
+                                <option>Fail</option>
+                            </select>
+                        </td>
+                        <td><i class="bi bi-play-fill"></i></td>
+                        <td>
+                            <div class="dropdown" style="float: right; font-size: x-small">
+                                <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </a>
+                                <ul class="dropdown-menu" style="float: right; font-size: x-small">
+                                    <li>
+                                        <a class="dropdown-item" href="/test/case/view">View</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/test/case/edit">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">3</div>
+</div>
+
+<div id="loading" class="loading" style="display:none">Loading&#8230;</div>
+
+{% endblock %}

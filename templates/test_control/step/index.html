@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block page_title %}Test Step{% endblock %}
+{% block container_title %}Test Step{% endblock %}
+
+{% block toolbar %}
+{% endblock %}
+
+{% block content %}
+<script src="{% static 'js/executer/main.js' %}"></script>
+
+<div class="row">
+    <div class="col-md-12">
+    </div>
+</div>
+<div id="loading" class="loading" style="display:none">Loading&#8230;</div>
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block page_title %}Sender{% endblock %}
+{% block container_title %}Sender{% endblock %}
+
+{% block toolbar %}
+{% endblock %}
+
+{% block content %}
+<script src="{% static 'js/packets/sender.js' %}"></script>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="input-group mb-12" style="margin-top: 30px">
+            <label class="input-group-text" for="selectProtocol" style="width: 150px">Layer</label>
+            <select class="form-select" id="selectLayer" name="selectLayer">
+                <option value="3">Layer 3</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="input-group mb-12" style="margin-top: 30px">
+            <label class="input-group-text" for="selectFlag" style="width: 150px">Send Type</label>
+            <select class="form-select" id="selectSendType" name="selectSendType">
+                <option value="send">Send & Receive Packets</option>
+                <option value="send_return_first">Send & Return First Answer</option>
+                <option value="flood">Flood & Receive Packets</option>
+                <option value="flood_return_first">Flood & Return First Answer</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="input-group mb-12" style="margin-top: 30px">
+            <label class="input-group-text" for="selectProtocol" style="width: 150px">Protocol</label>
+            <select class="form-select" id="selectProtocol" name="selectProtocol">
+                <option value="tcp">TCP</option>
+                <option value="udp">UDP</option>
+                <option value="icmp">ICMP</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="input-group mb-12" style="margin-top: 30px">
+            <label class="input-group-text" for="selectFlag" style="width: 150px">Flag</label>
+            <select class="form-select" id="selectFlag" name="selectFlag">
+                <option value="S">S</option>
+                <option value="0x2">0x2 (Traceroute)</option>
+                <option value="icmp">ICMP</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="input-group mb-12" style="margin-top: 30px">
+            <label class="input-group-text" for="inputInterval" style="width: 150px">Interval</label>
+            <input type="number" class="form-control" id="inputInterval" name="inputInterval" value="1"
+                   placeholder="1 - 10" required>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="input-group mb-12" style="margin-top: 30px">
+            <label class="input-group-text" for="inputRetry" style="width: 150px">Retry</label>
+            <input type="number" class="form-control" id="inputRetry" name="inputRetry" value="3"
+                   placeholder="1 - 10" required>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="input-group mb-12" style="margin-top: 30px">
+            <label class="input-group-text" for="inputTimeout" style="width: 150px">Timeout</label>
+            <input type="number" class="form-control" id="inputTimeout" name="inputTimeout" value="3"
+                   placeholder="1 - 10" required>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-5">
+        <div class="input-group">
+            <span class="input-group-text" style="width: 200px">Source Address</span>
+            <input type="text" class="form-control" id="inputSrcIpAddress" name="inputSrcIpAddress"
+                   placeholder="IP Address" maxlength="15" required>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="input-group">
+            <span class="input-group-text" style="width: 150px">Source Port</span>
+            <input type="number" class="form-control" id="inputSrcPort" name="inputSrcPort" value="8080"
+                   placeholder="1 - 65536" required>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <i class="bi bi-info-circle" style="margin-top: 10px"></i>
+        </div>
+    </div>
+    <div class="col-md-2" style="margin-top: 10px">
+        <div class="form-check form-switch">
+            <input id="switchSrcRandomPort" class="form-check-input" type="checkbox" role="switch">
+            <label class="form-check-label" for="switchSrcRandomPort">Random Port</label>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-5">
+        <div class="input-group">
+            <span class="input-group-text" style="width: 200px">Destination Address</span>
+            <input type="text" class="form-control" id="inputDstIpAddress" name="inputDstIpAddress"
+                   placeholder="IP Address" maxlength="15" required>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="input-group">
+            <span class="input-group-text" style="width: 150px">Destination Port</span>
+            <input type="text" class="form-control" id="inputDstPort" name="inputDstPort" value="8080"
+                   placeholder="1 - 65536 / 8080,8081 / 8080:8090" required>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <i class="bi bi-info-circle" style="margin-top: 10px"></i>
+        </div>
+    </div>
+</div>
+<br>
+<button class="btn btn-danger" onclick="send('{{ csrf_token }}')">Send</button>
+<div class="row">
+    <div class="col-md-10" style="margin-top: 35px">
+        <div class="form-check form-switch">
+            <input id="switchAppendResultCodeFile" class="form-check-input" type="checkbox" role="switch">
+            <label class="form-check-label" for="switchAppendResult">Result append to text area</label>
+        </div>
+    </div>
+    <div class="col-md-2" style="margin-top: 30px">
+        <button class="btn btn-danger" style="float: right; width: 100%"
+                onclick="clearObject('textResult')">Clear Result
+        </button>
+    </div>
+    <div class="col-md-12" style="margin-top: 30px">
+                    <textarea id="textResult" class="form-control" rows="25" readonly
+                              style="resize: none"></textarea>
+    </div>
+</div>
+<div id="loading" class="loading" style="display:none">Loading&#8230;</div>
+{% endblock %}

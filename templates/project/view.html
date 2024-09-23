@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block page_title %}Projects{% endblock %}
+{% block container_title %}
+  <ul class="nav nav-tabs" id="myTab" role="tablist" style="font-size: small; border: 1px; float: bottom; margin-bottom: -15px">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button"
+        role="tab" aria-controls="home-tab-pane" aria-selected="true">Details</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button"
+        role="tab" aria-controls="profile-tab-pane" aria-selected="false">Versions</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button"
+        role="tab" aria-controls="contact-tab-pane" aria-selected="false">Settings</button>
+    </li>
+  </ul>
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+    <form action="/project/save" method="POST">
+      {% csrf_token %}
+      <div class="card" style="padding: 10px;">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="input-group">
+                      <span class="input-group-text" style="width: 150px; font-size: small">Name</span>
+                      <input type="text" class="form-control" id="name" name="name" style="font-size: small"
+                          maxlength="250" required>
+                  </div>
+              </div>
+              <div class="col-md-6" style="margin-top: 10px">
+                  <div class="input-group">
+                      <span class="input-group-text" style="width: 150px; font-size: small">Owner</span>
+                      <select class="form-select" id="owner" name="owner" style="font-size: small">
+                          <option value="0">Administrator</option>
+                          <option value="1">Faruk Yildiz</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="col-md-6" style="margin-top: 10px">
+                  <div class="input-group">
+                      <span class="input-group-text" style="width: 150px; font-size: small">Tag</span>
+                      <input type="text" class="form-control" id="tag" name="tag" style="font-size: small"
+                          maxlength="250" required>
+                  </div>
+              </div>
+              <div class="col-md-6" style="margin-top: 10px">
+                  <div class="input-group">
+                      <span class="input-group-text" style="width: 150px; font-size: small">Category</span>
+                      <select class="form-select" id="category" name="category" style="font-size: small">
+                          <option value="0">Backend</option>
+                          <option value="1">Frontend</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="col-md-6" style="margin-top: 10px">
+                  <div class="input-group">
+                      <span class="input-group-text" style="width: 150px; font-size: small">Status</span>
+                      <select class="form-select" id="status" name="status" style="font-size: small">
+                          <option value="True">Enable</option>
+                          <option value="False">Disable</option>
+                      </select>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary btn-sm">Save</button>
+      <br>
+      <br>
+  </form>
+
+  </div>
+  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">2</div>
+  <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">3</div>
+</div>
+
+<div id="loading" class="loading" style="display:none">Loading&#8230;</div>
+
+{% endblock %}

@@ -1,0 +1,301 @@
+{% extends 'layout.html' %}
+
+{% block page_title %}Create New Test Case{% endblock %}
+{% block container_title %}
+<br>
+Create New Test Case
+<br><br><br>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist"
+    style="font-size: small; border: 1px; float: bottom; margin-bottom: -15px">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button"
+            role="tab" aria-controls="home-tab-pane" aria-selected="true">Details</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pre-condition-tab" data-bs-toggle="tab" data-bs-target="#pre-condition-tab-pane"
+            type="button" role="tab" aria-controls="pre-condition-tab-pane"
+            aria-selected="false">Pre-Conditions</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="test-step-tab" data-bs-toggle="tab" data-bs-target="#test-step-tab-pane"
+            type="button" role="tab" aria-controls="test-step-tab-pane" aria-selected="false">Test Steps</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="expected-result-tab" data-bs-toggle="tab"
+            data-bs-target="#expected-result-tab-pane" type="button" role="tab" aria-controls="expected-result-tab-pane"
+            aria-selected="false">Expected Result</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="test-requirement-tab" data-bs-toggle="tab"
+            data-bs-target="#test-requirement-tab-pane" type="button" role="tab"
+            aria-controls="test-requirement-tab-pane" aria-selected="false">Test
+            Requirements</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report-tab-pane" type="button"
+            role="tab" aria-controls="report-tab-pane" aria-selected="false">Report</button>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<form action="/test/case/save" method="POST">
+    {% csrf_token %}
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+            tabindex="0">
+            <div class="card" style="padding: 10px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-text" style="width: 150px; font-size: small">Project</span>
+                            <select class="form-select" id="project" name="project" style="font-size: small" disabled>
+                                {% for project in projects %}
+                                    {% if project.id == active_project %}
+                                        <option value="{{ project.id }}" selected>{{ project.id }} - {{ project.name }}</option>
+                                    {% else %}
+                                        <option value="{{ project.id }}">{{ project.id }} - {{ project.name }}</option>    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 10px;">
+                        <div class="input-group">
+                            <span class="input-group-text" style="width: 150px; font-size: small">Test Set</span>
+                            <select class="form-select" id="set" name="set" style="font-size: small">
+                                {% for set in sets %}
+                                    <option value="{{ set.id }}">{{ set.id }} - {{ set.summary }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-top: 10px">
+                        <div class="input-group">
+                            <span class="input-group-text" style="width: 150px; font-size: small">Type</span>
+                            <select class="form-select" id="type" name="type" style="font-size: small">
+                                {% for type in types %}
+                                    <option value="{{ type.id }}">{{ type.type }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-top: 10px">
+                        <div class="input-group">
+                            <span class="input-group-text" style="width: 150px; font-size: small">Priority</span>
+                            <select class="form-select" id="priority" name="priority" style="font-size: small">
+                                <option value="1">Low</option>
+                                <option value="2">High</option>
+                                <option value="3">Urgent</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 10px">
+                        <div class="input-group">
+                            <span class="input-group-text" style="width: 150px; font-size: small">Summary</span>
+                            <input type="text" class="form-control" id="summary" name="summary"
+                                style="font-size: small" maxlength="250" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="margin-top: 10px">
+                    <div class="input-group">
+                        <span class="input-group-text" style="width: 150px; font-size: small">Description</span>
+                        <textarea id="description" name="description" rows="3" class="form-control" style="resize: none"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pre-condition-tab-pane" role="tabpanel" aria-labelledby="pre-condition-tab"
+            tabindex="0">
+            <div class="card" style="padding: 10px;">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-text" style="width: 150px; font-size: small">Pre-Condition</span>
+                        <input class="form-control" id="inputPassword" name="inputPassword" style="font-size: small;">
+                        <button class="btn btn-outline-secondary btn-sm" type="button" id="button-addon2">+</button>
+                    </div>
+                    <hr style="margin-top: 15px;" />
+                    <table class="table table-hover" style="font-size: x-small">
+                        <tbody>
+                            <tr>
+                                <td style="width: 40px;">1</td>
+                                <td>Pre-Condition description</td>
+                                <td style="width: 30px;">
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </td>
+                                <td style="width: 30px;">
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Pre-Condition description</td>
+                                <td>
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="test-step-tab-pane" role="tabpanel" aria-labelledby="test-step-tab" tabindex="0">
+            <div class="card" style="padding: 10px;">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-text" style="width: 150px; font-size: small">Test Step</span>
+                        <input class="form-control" id="inputPassword" name="inputPassword" style="font-size: small;">
+                        <button class="btn btn-outline-secondary btn-sm" type="button" id="button-addon2">+</button>
+                    </div>
+                    <hr style="margin-top: 15px;" />
+                    <table class="table table-hover" style="font-size: x-small">
+                        <tbody>
+                            <tr>
+                                <td style="width: 40px;">1</td>
+                                <td>Test step description</td>
+                                <td style="width: 30px;">
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </td>
+                                <td style="width: 30px;">
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Test step description</td>
+                                <td style="width: 30px;">
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </td>
+                                <td style="width: 30px;">
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="expected-result-tab-pane" role="tabpanel" aria-labelledby="expected-result-tab"
+            tabindex="0">
+            <div class="card" style="padding: 10px;">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-text" style="width: 150px; font-size: small">Expected Result</span>
+                        <input class="form-control" id="inputPassword" name="inputPassword" style="font-size: small;">
+                        <button class="btn btn-outline-secondary btn-sm" type="button" id="button-addon2">+</button>
+                    </div>
+                    <hr style="margin-top: 15px;" />
+                    <table class="table table-hover" style="font-size: x-small">
+                        <tbody>
+                            <tr>
+                                <td style="width: 40px;">1</td>
+                                <td>Result description</td>
+                                <td style="width: 30px;">
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </td>
+                                <td style="width: 30px;">
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Result description</td>
+                                <td style="width: 30px;">
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </td>
+                                <td style="width: 30px;">
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="test-requirement-tab-pane" role="tabpanel" aria-labelledby="test-requirement-tab"
+            tabindex="0">
+            <div class="card" style="padding: 10px;">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-text" style="width: 150px; font-size: small">Test Requirement</span>
+                        <input class="form-control" id="inputPassword" name="inputPassword" placeholder="Title"
+                            style="font-size: small;">
+                        <input class="form-control" id="inputPassword" name="inputPassword" placeholder="Description"
+                            style="font-size: small;">
+                        <button class="btn btn-outline-secondary btn-sm" type="button" id="button-addon2">+</button>
+                    </div>
+                    <hr style="margin-top: 15px;" />
+                    <table class="table table-hover" style="font-size: x-small">
+                        <tbody>
+                            <tr>
+                                <td style="width: 40px;">1</td>
+                                <td>OS: Windows 10</td>
+                                <td style="width: 30px;">
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </td>
+                                <td style="width: 30px;">
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Browser: Google Chrome</td>
+                                <td style="width: 30px;">
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </td>
+                                <td style="width: 30px;">
+                                    <a role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="report-tab-pane" role="tabpanel" aria-labelledby="report-tab"
+            tabindex="0">
+            Report
+        </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary btn-sm">Save</button>
+    <br>
+    <br>
+</form>
+{% endblock %}
