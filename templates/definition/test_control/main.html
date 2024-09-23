@@ -1,0 +1,168 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block page_title %}Definition -> Test Control{% endblock %}
+{% block container_title %}Definition -> Test Control{% endblock %}
+
+{% block toolbar %}
+{% endblock %}
+
+{% block content %}
+<script src="{% static 'js/executer/main.js' %}"></script>
+
+<div class="row">
+  <div class="col-md-12" style="font-size: small">
+    <div class="card">
+      <div class="card-header">
+        Case Definitions
+      </div>
+      <div class="card-body">
+        <a type="button" class="btn btn-outline-secondary btn-sm position-relative"
+          style="width: 150px; height: 75px; line-height: 75px; text-align: center; font-size: medium;"
+          href="/definition/test_control/case/type/">
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+            <i class="bi bi-file-earmark-medical-fill"></i>
+          </span>
+          Type
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <a type="button" class="btn btn-outline-secondary btn-sm position-relative"
+          style="width: 150px; height: 75px; line-height: 75px; text-align: center; font-size: medium;"
+          href="/definition/test_control/case/priority/">
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+            <i class="bi bi-file-earmark-medical-fill"></i>
+          </span>
+          Prioirty
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <a type="button" class="btn btn-outline-secondary btn-sm position-relative"
+          style="width: 150px; height: 75px; line-height: 75px; text-align: center; font-size: medium;"
+          href="/definition/test_control/set/priority/">
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+            <i class="bi bi-file-earmark-medical-fill"></i>
+          </span>
+          Component
+        </a>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 30px">
+      <div class="card-header">
+        Set Definitions
+      </div>
+      <div class="card-body">
+        <a type="button" class="btn btn-outline-secondary btn-sm position-relative"
+          style="width: 150px; height: 75px; line-height: 75px; text-align: center; font-size: medium;"
+          href="/definition/test_control/set/type/">
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+            <i class="bi bi-file-earmark-medical-fill"></i>
+          </span>
+          Type
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <a type="button" class="btn btn-outline-secondary btn-sm position-relative"
+          style="width: 150px; height: 75px; line-height: 75px; text-align: center; font-size: medium;"
+          href="/definition/test_control/set/category/">
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+            <i class="bi bi-file-earmark-medical-fill"></i>
+          </span>
+          Category
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <a type="button" class="btn btn-outline-secondary btn-sm position-relative"
+          style="width: 150px; height: 75px; line-height: 75px; text-align: center; font-size: medium;"
+          href="/definition/test_control/set/priority/">
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+            <i class="bi bi-file-earmark-medical-fill"></i>
+          </span>
+          Prioirty
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <a type="button" class="btn btn-outline-secondary btn-sm position-relative"
+          style="width: 150px; height: 75px; line-height: 75px; text-align: center; font-size: medium;"
+          href="/definition/test_control/set/priority/">
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+            <i class="bi bi-file-earmark-medical-fill"></i>
+          </span>
+          Component
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <a type="button" class="btn btn-outline-secondary btn-sm position-relative"
+          style="width: 150px; height: 75px; line-height: 75px; text-align: center; font-size: medium;"
+          href="/definition/test_control/set/priority/">
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+            <i class="bi bi-file-earmark-medical-fill"></i>
+          </span>
+          Prioirty
+        </a>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 30px">
+      <div class="card-header">
+        Execution Definitions
+      </div>
+      <div class="card-body">
+        <a type="button" class="btn btn-outline-secondary btn-sm position-relative"
+          style="width: 150px; height: 75px; line-height: 75px; text-align: center; font-size: medium;"
+          href="/definition/test_control/set/type/">
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+            <i class="bi bi-file-earmark-medical-fill"></i>
+          </span>
+          File  Type
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <a type="button" class="btn btn-outline-secondary btn-sm position-relative"
+          style="width: 150px; height: 75px; line-height: 75px; text-align: center; font-size: medium;"
+          href="/definition/test_control/set/priority/">
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+            <i class="bi bi-info-circle-fill"></i>
+          </span>
+          Prioirty
+        </a>
+      </div>
+    </div>
+    &nbsp;&nbsp;&nbsp;
+
+    <div class="accordion" id="accordionExample" style="display: none;">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+            aria-expanded="true" aria-controls="collapseOne">
+            Case Definition
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <a type="button" class="btn btn-outline-secondary btn-sm"
+              style="width: 150px; height: 75px; line-height: 75px; text-align: center; font-size: medium;"
+              href="/definition/test_control/case/type/">Case Type</a>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Set Definition
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <a type="button" class="btn btn-outline-secondary btn-sm"
+              style="width: 150px; height: 75px; line-height: 75px; text-align: center; font-size: medium;"
+              href="/definition/test_control/set/type/">Type</a>
+            <a type="button" class="btn btn-outline-secondary btn-sm"
+              style="width: 150px; height: 75px; line-height: 75px; text-align: center; font-size: medium;"
+              href="/definition/test_control/set/category/">Category</a>
+            <a type="button" class="btn btn-outline-secondary btn-sm"
+              style="width: 150px; height: 75px; line-height: 75px; text-align: center; font-size: medium;"
+              href="/definition/test_control/set/priority/">Prioirty</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="loading" class="loading" style="display:none">Loading&#8230;</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block page_title %}Edit Test Case Type{% endblock %}
+{% block container_title %}Edit Test Case Type{% endblock %}
+
+{% block content %}
+<form action="/definition/test_control/case/type/update" method="POST">
+    {% csrf_token %}
+    <input id="id" name="id" value="{{ type.id }}" style="display: none"/>
+    <div class="card" style="padding: 10px;">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-text" style="width: 150px; font-size: small">Status</span>
+                    <select class="form-select" id="status" name="status" style="font-size: small">
+                        <option value="True">Enable</option>
+                        <option value="False">Disable</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12" style="margin-top: 10px">
+                <div class="input-group">
+                    <span class="input-group-text" style="width: 150px; font-size: small">Type</span>
+                    <input type="text" class="form-control" id="name" name="name" style="font-size: small"
+                        maxlength="250" value="{{ type.name }}" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary btn-sm">Save</button>
+    <br>
+    <br>
+</form>
+{% endblock %}
